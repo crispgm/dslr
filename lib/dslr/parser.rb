@@ -1,6 +1,6 @@
 module Dslr
   class Parser
-  	attr_reader :attributes
+  	attr_reader :attributes, :file_content
   	attr_reader :error
 
     def initialize(filename)

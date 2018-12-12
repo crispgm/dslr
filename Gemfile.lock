@@ -1,0 +1,34 @@
+PATH
+  remote: .
+  specs:
+    ruby-dslr (1.0.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    codeclimate-test-reporter (1.0.9)
+      simplecov (<= 0.13)
+    docile (1.1.5)
+    json (2.1.0)
+    minitest (5.11.3)
+    rake (10.5.0)
+    shoulda-context (1.2.2)
+    simplecov (0.13.0)
+      docile (~> 1.1.0)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.15)
+  codeclimate-test-reporter (~> 1.0.0)
+  minitest (~> 5.0)
+  rake (~> 10.0)
+  ruby-dslr!
+  shoulda-context
+
+BUNDLED WITH
+   1.16.2
