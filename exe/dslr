@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), *%w(.. lib)))
+
+require "dslr"
+
+dsl = Dslr::Parser.new(ARGV[0])
+if dsl.valid?
+  dsl.run
+else
+  puts dsl.error
+end

@@ -1,0 +1,3 @@
+set :test, 1
+get :test
+print :test
