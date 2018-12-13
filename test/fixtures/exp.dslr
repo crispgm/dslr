@@ -1,0 +1,12 @@
+set :a, 1
+set :b, 2
+
+set :c, get(:a) + get(:b)
+if get(:a) == 1
+  set :d, 0
+else
+  set :d, 1
+end
+
+print :c
+print :d
