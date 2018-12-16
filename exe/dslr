@@ -7,6 +7,7 @@ require "dslr"
 dsl = Dslr::Parser.new(ARGV[0])
 if dsl.valid?
   dsl.run
+  puts dsl.result
 else
   puts dsl.error
 end
