@@ -13,16 +13,29 @@ jobs:
     name: test
     runs-on: ubuntu-latest
     steps:
-    - name: checkout
+    - name: Checkout
       uses: actions/checkout@v3
 
-    - name: init test reporter
+    - name: Setup
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6.10
+        bundler-cache: true
+
+    - name: Update Rubygems & Bundler
+      run: 'gem update --system --no-document && gem update bundler --no-document'
+
+    - name: Install Bundler 2
+      run: 'gem install bundler -v "2.0.1" --force'
+    - run: 'bundle install'
+
+    - name: Init test reporter
       run: |
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         chmod +x ./cc-test-reporter
         ./cc-test-reporter before-build
 
-    - name: test
+    - name: Test & report
       run: |
         bundle exec rake test
         ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
