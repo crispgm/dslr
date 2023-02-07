@@ -1,0 +1,28 @@
+name: build
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+env:
+  CC_TEST_REPORTER_ID: 4f702b879e26de6ee2187c06c90c98279013b18c7ee4b954443df384b64ab151
+
+jobs:
+  checks:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3
+
+    - name: init test reporter
+      run: |
+        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        chmod +x ./cc-test-reporter
+        ./cc-test-reporter before-build
+
+    - name: test
+      run: |
+        bundle exec rake test
+        ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
