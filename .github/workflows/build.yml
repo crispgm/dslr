@@ -5,9 +5,6 @@ on:
       - master
   pull_request:
 
-env:
-  CC_TEST_REPORTER_ID: 4f702b879e26de6ee2187c06c90c98279013b18c7ee4b954443df384b64ab151
-
 jobs:
   checks:
     name: test
@@ -23,19 +20,15 @@ jobs:
         bundler-cache: true
 
     - name: Update Rubygems & Bundler
-      run: 'gem update --system --no-document && gem update bundler --no-document'
-
-    - name: Install Bundler 2
-      run: 'gem install bundler -v "2.0.1" --force'
-    - run: 'bundle install'
-
-    - name: Init test reporter
       run: |
-        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        chmod +x ./cc-test-reporter
-        ./cc-test-reporter before-build
+        'gem update --system --no-document && gem update bundler --no-document'
+        'gem install bundler -v "2.0.1" --force'
+
+    - run: 'bundle install'
 
     - name: Test & report
       run: |
         bundle exec rake test
-        ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+    - name: Codecov
+      uses: codecov/codecov-action@v3
